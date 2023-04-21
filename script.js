@@ -1,3 +1,5 @@
+let num1, operator, num2;
+
 function add(a, b) {
     // console.log(a + b);
     return (a + b);
