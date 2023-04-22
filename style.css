@@ -13,8 +13,8 @@ main{
 }
 
 .container{
-    background-color: black;
-    border: solid white 1px;
+    background-color: #000;
+    border: solid #fff 1px;
     border-radius: .5rem;
     height: 75vh;
     width: 25vw;
@@ -35,12 +35,12 @@ main{
     align-items: flex-end;
 }
 
-.output1{
+.overall{
     font-size: 1rem;
     height: 40%;
 }
 
-.output2{
+.currentInput{
     font-size: 3rem;
     height: 60%;
 }
@@ -64,7 +64,7 @@ main{
     height: 100%;
     width: 100%;
     border-radius: .5rem;
-    color: white;
+    color: #fff;
     font-size: 1.5rem;
 }
 
@@ -72,7 +72,7 @@ main{
     background-color: #7F8487;
 }
 
-.operator{
+.operator, .equals{
     background-color: #FFB100;
     grid-column: 4;
 }
