@@ -46,7 +46,7 @@ function operate(operator, a, b) {
     }
 }
 
-// Functions
+// Buttons func
 function count(){
     displayLength = currentDisplay.textContent.length;
 }
@@ -75,29 +75,59 @@ function deleteInput(){
 
 function addNumber(number){
     if(currentDisplay.textContent === '0') resetDisplay();
-    currentDisplay.textContent += number;
+    if (Number(currentDisplay.textContent) >= 1e10) return
+    if (Number(currentDisplay.textContent + number) >= 1e10 || Number(currentDisplay.textContent + number) <= -1e10) {
+        currentDisplay.textContent = (Number(currentDisplay.textContent + number)).toExponential(6);
+    } else {
+        currentDisplay.textContent += number;
+    }
     count();
 }
 
 function addOperator(sign){
+    if(operator !== null) solve()
     num1 = currentDisplay.textContent;
     operator = sign;
     overallDisplay.textContent = `${num1} ${operator}`
     resetDisplay()
 }
 
-function solve(){
+function placeDot(){
+    if(currentDisplay.textContent.includes('.')) return
+    currentDisplay.textContent += '.'
+}
+
+function solve(){  
     num2 = currentDisplay.textContent;
     overallDisplay.textContent = `${num1} ${operator} ${num2}`
     solution = operate(operator, num1, num2);
     resetDisplay();
-    currentDisplay.textContent = solution;
+    if (solution === Infinity || solution === -Infinity || isNaN(solution)) {
+        currentDisplay.textContent = 'Error';
+    } else if (solution >= 1e10 || solution <= -1e10) {
+        currentDisplay.textContent = solution.toExponential(6);
+    } else if (solution % 1 !== 0 || solution.toString().length > 12) {
+        currentDisplay.textContent = Number(solution).toFixed(2);
+    } else {
+        currentDisplay.textContent = solution;
+    }
 }
+
+// function adjustFontSize() {
+//     const maxLength = 9; // the maximum number of digits that can fit in the display
+//     const length = currentDisplay.textContent.length;
+//     if (length <= maxLength) {
+//       currentDisplay.style.fontSize = "3rem"; // reset font size
+//     } else {
+//       const fontSize = 3 - 0.15 * (length - maxLength); // calculate font size based on length
+//       currentDisplay.style.fontSize = `${fontSize}rem`;
+//     }
+//   }
 
 // Buttons
 clearBtn.addEventListener('click', clearDisplay);
 deleteBtn.addEventListener('click', deleteInput);
-
+dotBtn.addEventListener('click', placeDot);
 equalsBtn.addEventListener('click', solve)
 
 
