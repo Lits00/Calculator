@@ -52,7 +52,7 @@ function count(){
 }
 
 function resetDisplay(){
-    currentDisplay.textContent = ''
+    currentDisplay.textContent = '';
 }
 
 function clearDisplay(){
@@ -61,21 +61,31 @@ function clearDisplay(){
     num1 = '';
     num2 = '';
     operator = null;
+    solution = null;
+}
+
+function newSet(){
+    overallDisplay.textContent = '';
+    currentDisplay.textContent = '';
+    num1 = '';
+    num2 = '';
+    operator = null;
+    solution = null;
 }
 
 function deleteInput(){
     if(displayLength === 1){
-        currentDisplay.textContent = '0'
+        currentDisplay.textContent = '0';
     } else {
         currentDisplay.textContent = currentDisplay.textContent.slice(0, -1);
         count();
-        // console.log(displayLength)
     }
 }
 
 function addNumber(number){
     if(currentDisplay.textContent === '0') resetDisplay();
-    if (Number(currentDisplay.textContent) >= 1e10) return
+    if(solution !== null) newSet();
+    if (Number(currentDisplay.textContent) >= 1e10) return;
     if (Number(currentDisplay.textContent + number) >= 1e10 || Number(currentDisplay.textContent + number) <= -1e10) {
         currentDisplay.textContent = (Number(currentDisplay.textContent + number)).toExponential(6);
     } else {
@@ -85,21 +95,22 @@ function addNumber(number){
 }
 
 function addOperator(sign){
-    if(operator !== null) solve()
+    if(operator !== null) solve();
     num1 = currentDisplay.textContent;
     operator = sign;
-    overallDisplay.textContent = `${num1} ${operator}`
-    resetDisplay()
+    overallDisplay.textContent = `${num1} ${operator}`;
+    resetDisplay();
 }
 
 function placeDot(){
-    if(currentDisplay.textContent.includes('.')) return
-    currentDisplay.textContent += '.'
+    if(currentDisplay.textContent.includes('.')) return;
+    currentDisplay.textContent += '.';
 }
 
 function solve(){  
+    if(operator === null) return;
     num2 = currentDisplay.textContent;
-    overallDisplay.textContent = `${num1} ${operator} ${num2}`
+    overallDisplay.textContent = `${num1} ${operator} ${num2}`;
     solution = operate(operator, num1, num2);
     resetDisplay();
     if (solution === Infinity || solution === -Infinity || isNaN(solution)) {
@@ -110,19 +121,10 @@ function solve(){
         currentDisplay.textContent = Number(solution).toFixed(2);
     } else {
         currentDisplay.textContent = solution;
+        
     }
+    operator = null;
 }
-
-// function adjustFontSize() {
-//     const maxLength = 9; // the maximum number of digits that can fit in the display
-//     const length = currentDisplay.textContent.length;
-//     if (length <= maxLength) {
-//       currentDisplay.style.fontSize = "3rem"; // reset font size
-//     } else {
-//       const fontSize = 3 - 0.15 * (length - maxLength); // calculate font size based on length
-//       currentDisplay.style.fontSize = `${fontSize}rem`;
-//     }
-//   }
 
 // Buttons
 clearBtn.addEventListener('click', clearDisplay);
