@@ -74,7 +74,7 @@ function newSet(){
 }
 
 function deleteInput(){
-    if(displayLength === 1){
+    if(displayLength === 1 || currentDisplay.textContent == '0'){
         currentDisplay.textContent = '0';
     } else {
         currentDisplay.textContent = currentDisplay.textContent.slice(0, -1);
