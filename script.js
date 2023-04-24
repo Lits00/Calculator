@@ -10,6 +10,8 @@ const clearBtn = document.querySelector('.clr');
 const deleteBtn = document.querySelector('.del');
 const dotBtn = document.querySelector('.dot');
 const equalsBtn = document.querySelector('.equals');
+const year = 
+document.getElementById('currentYear').textContent = `${new Date().getFullYear()}`;
 
 // Formula
 function add(a, b) {

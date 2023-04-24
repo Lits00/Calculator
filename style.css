@@ -5,18 +5,18 @@
     padding: 0;
 }
 
-main, .container, .display, .btn{
+body, .container, .display, .btn{
     display: flex;
     justify-content: center;
+    flex-direction: column;
 }
 
-main, .display, .btn{
+body, .display, .btn{
     align-items: center;
 }
 
-main{
+body{
     background-color: #F3DEBA;
-    min-height: 100vh;
 }
 
 .container{
@@ -24,17 +24,15 @@ main{
     border: solid 1px #fff;
     border-radius: .5rem;
     box-shadow: .5rem .5rem .5rem;
-    flex-direction: column;
     height: 75vh;
-    margin: 0 auto;
-    max-width: 600px;
+    margin: 3rem auto;
+    min-width: 380px;
 }
 
 .display{
     background-color: #ECF2FF;
     border-radius: .2rem;
     height: 20vh;
-    flex-direction: column;
     margin: 1rem;
     padding: 1rem 1rem .5rem;
 }
